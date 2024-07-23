@@ -38,7 +38,15 @@ class CategoryController extends Controller
 
         
     }
+    public function get_category_with_sub(){
 
+
+        $categories = Category::with('childs')->whereHas('translations', function ($query) {
+            $query->where('locale', '=', app()->getLocale());
+        })->where('type' , '0')->get();
+        return  $this->res(true ,'All Categories ' , 200 ,CategoryResource::collection($categories));
+
+    }
 
     public function get_category_from_sub(Request $request){
         
