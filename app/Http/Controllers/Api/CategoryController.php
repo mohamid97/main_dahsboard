@@ -50,7 +50,6 @@ class CategoryController extends Controller
 
     public function get_category_from_sub(Request $request){
         
-    
         $category = Category::with('childs')->whereHas('translations', function ($query) use ($request) {
             $query->where('locale', '=', app()->getLocale())->where('slug' , $request->slug);
         })->where('type' , '0')->first();

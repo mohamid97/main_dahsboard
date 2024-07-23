@@ -23,7 +23,7 @@ class ProductController extends Controller
     //
     public function index()
     {
-        return view('admin.products.index' , ['langs'=>$this->langs , 'products'=> Product::all() , 'categories'=> Category::all()]);
+        return view('admin.products.index' , ['langs'=>$this->langs , 'products'=> Product::withTrashed()->get() , 'categories'=> Category::all()]);
     }
 
     public function create()
@@ -151,4 +151,34 @@ class ProductController extends Controller
         }
 
     }
+
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->forceDelete();
+        Alert::success('success', 'products Deleted Successfully !');
+        return redirect()->route('admin.products.index');
+    }
+
+    public function soft_delete($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        Alert::success('success', 'products Soft Deleted Successfully !');
+        return redirect()->route('admin.products.index');
+
+    }
+
+    public function restore($id)
+    {
+        $product = Product::withTrashed()->findOrFail($id);
+        $product->restore();
+        Alert::success('success', 'products Restored Successfully !');
+        return redirect()->route('admin.products.index');
+
+    }
+
+
+
 }
