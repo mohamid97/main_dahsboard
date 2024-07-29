@@ -62,6 +62,9 @@ class SettingController extends Controller
                 $setting->payments = $request->payments; 
                 $setting->faq = $request->faq; 
                 $setting->feedback = $request->feedback;
+                $setting->ourteam  = $request->ourteam;
+                $setting->events  = $request->events;
+                
                foreach ($this->files as $file){
                   $image_name = $this->uploadFile($request , $file);
                    if($image_name){

@@ -575,7 +575,44 @@
                             @enderror
                         </div>
 
+                        
 
+                        <div class="form-group">
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <lable>Show/Hide - Our Team</lable>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="custom-control custom-checkbox">
+                                        <input {{($settings->ourteam ?'checked':'')}} name="ourteam" type="checkbox" class="custom-control-input" id="customCheck6ourteam">
+                                        <label class="custom-control-label" for="customCheck6ourteam"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            @error('ourteam')
+                            <div class="text-danger">{{ $errors->first('ourteam') }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <lable>Show/Hide - Events</lable>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="custom-control custom-checkbox">
+                                        <input {{($settings->events ?'checked':'')}} name="events" type="checkbox" class="custom-control-input" id="customCheck6events">
+                                        <label class="custom-control-label" for="customCheck6events"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            @error('events')
+                            <div class="text-danger">{{ $errors->first('events') }}</div>
+                            @enderror
+                        </div>
+                        
 
                         <div class="form-group">
 

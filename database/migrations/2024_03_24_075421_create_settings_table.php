@@ -46,6 +46,8 @@ return new class extends Migration
             $table->string('payments')->nullable();
             $table->string('faq')->nullable();
             $table->string('feedback')->nullable();
+            $table->string('ourteam')->nullable();
+            $table->string('events')->nullable();
             $table->timestamps();
         });
     }

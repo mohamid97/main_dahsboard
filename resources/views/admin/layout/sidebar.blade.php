@@ -322,6 +322,77 @@
                             </li>
                     @endif
 
+
+                    
+
+                    @if($settings->ourteam )
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-briefcase nav-icon"></i>
+                                    <p>
+                                        Our Team
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.ourteam.index')}}" class="nav-link">
+                                            <i class="fa fa-briefcase nav-icon"></i>
+                                            <p>  Our Team </p>
+                                        </a>
+                                    </li>
+
+                                    
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.ourteam.add')}}" class="nav-link">
+                                            <i class="fa fa-plus  nav-icon"></i>
+                                            <p>  Add </p>
+                                        </a>
+                                    </li>
+
+
+   
+                                </ul>
+                            </li>
+                    @endif
+
+
+
+                    @if($settings->events )
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-briefcase nav-icon"></i>
+                            <p>
+                                Events
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{route('admin.events.index')}}" class="nav-link">
+                                    <i class="fa fa-briefcase nav-icon"></i>
+                                    <p>  Events</p>
+                                </a>
+                            </li>
+
+                            
+                            <li class="nav-item">
+                                <a href="{{route('admin.events.add')}}" class="nav-link">
+                                    <i class="fa fa-plus  nav-icon"></i>
+                                    <p>  Add </p>
+                                </a>
+                            </li>
+
+
+
+                        </ul>
+                    </li>
+            @endif
+                    
+
+
                         <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="fa fa-search nav-icon"></i>

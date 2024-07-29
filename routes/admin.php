@@ -22,11 +22,13 @@ use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\DesController;
 use App\Http\Controllers\Admin\AchievementConroller;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\FeedBackController;
 use App\Http\Controllers\Admin\FqaController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\MissionVission;
 use App\Http\Controllers\Admin\MediaGroupcontroller;
+use App\Http\Controllers\Admin\OurteamController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Models\Admin\Payment;
 use Illuminate\Routing\RouteRegistrar;
@@ -108,6 +110,33 @@ Route::middleware('checkIfAdmin')->prefix('admin')->group(function (){
     Route::prefix('contact-us')->group(function (){
         Route::get('/' , [ContactUsController::class , 'index'])->name('admin.contact.index');
         Route::post('/update/{id}' , [ContactUsController::class , 'update'])->name('admin.contact.update');
+    });
+
+
+
+    // start our team 
+    Route::prefix('ourteam')->group(function(){
+        Route::get('/get' , [OurteamController::class , 'get'])->name('admin.ourteam.index');
+        Route::get('/edit/{id}' , [OurteamController::class , 'edit'])->name('admin.ourteam.edit');
+        Route::post('/update/{id}' , [OurteamController::class , 'update'])->name('admin.ourteam.update');
+        Route::get('/create' , [OurteamController::class , 'create'])->name('admin.ourteam.add');
+        Route::post('/store' , [OurteamController::class , 'store'])->name('admin.ourteam.store');
+        Route::get('/soft_delete/{id}' , [OurteamController::class , 'soft_delete'])->name('admin.ourteam.soft_delete');
+        Route::get('/restore/{id}' , [OurteamController::class , 'restore'])->name('admin.ourteam.restore');
+        Route::get('/destroy/{id}' , [OurteamController::class , 'destroy'])->name('admin.ourteam.destroy');
+    });
+
+
+    Route::prefix('events')->group(function(){
+        Route::get('/get' , [EventController::class , 'get'])->name('admin.events.index');
+        Route::get('/edit/{id}' , [EventController::class , 'edit'])->name('admin.events.edit');
+        Route::post('/update/{id}' , [EventController::class , 'update'])->name('admin.events.update');
+        Route::get('/create' , [EventController::class , 'create'])->name('admin.events.add');
+        Route::post('/store' , [EventController::class , 'store'])->name('admin.events.store');
+        Route::get('/soft_delete/{id}' , [EventController::class , 'soft_delete'])->name('admin.events.soft_delete');
+        Route::get('/restore/{id}' , [EventController::class , 'restore'])->name('admin.events.restore');
+        Route::get('/destroy/{id}' , [EventController::class , 'destroy'])->name('admin.events.destroy');
+
     });
 
 
