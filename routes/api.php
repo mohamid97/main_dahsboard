@@ -4,10 +4,12 @@
 use App\Http\Controllers\Api\AchivementController;
 use App\Http\Controllers\Api\CmsController;
 use App\Http\Controllers\Api\DescriptionController;
+use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\MissionVisionController;
+use App\Http\Controllers\Api\OurteamController;
 use App\Http\Controllers\Api\StatisticsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -55,6 +57,16 @@ Route::middleware('checkLang')->group(function (){
 
     });
 
+    //events
+    Route::prefix('events')->group(function(){
+        Route::get('/get' , [EventController::class , 'get']);
+
+    });
+
+    // start our team api 
+    Route::prefix('our-teams')->group(function(){
+         Route::get('/get' ,[OurteamController::class , 'get'] );
+    });
 
     Route::prefix('social-media')->group(function (){
        Route::get('/get' , [\App\Http\Controllers\Api\SocialController::class , 'get']);

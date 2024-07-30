@@ -24,7 +24,7 @@ class StoreEventRequest extends FormRequest
     public function rules()
     {
         return [
-           'title.*'=>'requried|string',
+           'title.*'=>'required|string',
            'des.*'=>'required|string',
            'group_media'=>'required|integer'
         ];

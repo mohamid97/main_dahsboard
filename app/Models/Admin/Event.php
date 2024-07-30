@@ -18,7 +18,7 @@ class Event extends Model implements TranslatableContract
 
 
     public function media(){
-        return $this->belongsTo(Event::class , 'media_id');
+        return $this->belongsTo(MediaGroup::class , 'media_id');
     }
 
 

@@ -22,7 +22,7 @@ class EventController extends Controller
     }
     //
     public function get()  {
-        $events = Event::withTrashed()->get();
+        $events = Event::with('media')->withTrashed()->get();
         return view('admin.events.index' , ['events'=>$events , 'langs'=>$this->langs]);
     }
 
@@ -55,64 +55,52 @@ class EventController extends Controller
             $event->save();
             DB::commit();
             Alert::success('Success', 'Event  saved !');
-            return redirect()->route('admin.ourteam.index');
+            return redirect()->route('admin.events.index');
 
         }catch(\Exception $e){
             dd($e->getMessage() , $e->getLine());
             DB::rollBack();
             Alert::error('error', 'Tell The Programmer To solve Error');
-            return redirect()->route('admin.ourteam.index');
+            return redirect()->route('admin.events.index');
         }
 
     }
 
     public function edit($id){
         try{
-            return view('admin.events.update' , ['event'=> Event::findOrFail($id) , 'langs'=> $this->langs]);
+            $media_groups = MediaGroup::all();
+            return view('admin.events.update' , ['medias'=>$media_groups , 'event'=> Event::findOrFail($id) , 'langs'=> $this->langs]);
 
         }catch(\Exception $e){
             Alert::error('error', 'Tell The Programmer To solve Error');
-            return redirect()->route('admin.ourteam.index'); 
+            return redirect()->route('admin.events.index'); 
         }
     }
 
-    public function update(UpdateTeamRequest $request , $id)
+    public function update(StoreEventRequest $request , $id)
     {
 
         try{
             DB::beginTransaction();
-            $team = Ourteam::findOrFail($id);
-            if ($request->has('image')) {
-                $image_name = time() . $request->image->getClientOriginalName();
-                $request->image->move(public_path('uploads/images/teams'), $image_name);
-                if ($team->image && file_exists(public_path('uploads/images/teams/' . $team->image))) {
-                    unlink(public_path('uploads/images/teams/' . $team->image));
-                }
-                $team->image = $image_name;
-            }
-            $team->facebook = $request->facebook;
-            $team->twitter = $request->twitter;
-            $team->instagram = $request->instagram;
-            $team->youtube = $request->youtube;
-            $team->tiktok = $request->tiktok;
-            $team->linkedin = $request->linkedin;
-
+            $event = Event::findOrFail($id);
+            $event->media_id = $request->group_media;
             foreach ($this->langs as $lang) {
-                $team->{'title:' . $lang->code} = $request->title[$lang->code];
-                $team->{'name:' . $lang->code} = $request->name[$lang->code];
-                $team->{'des:' . $lang->code} = $request->des[$lang->code];
+                $event->{'title:' . $lang->code} = $request->title[$lang->code];
+                $event->{'des:' . $lang->code} = $request->des[$lang->code];
 
             }
 
-            $team->save();
+            $event->save();
             DB::commit();
             Alert::success('Success', 'Your Member updated successfully!');
-            return redirect()->route('admin.ourteam.index');
+            return redirect()->route('admin.events.index');
 
 
         }catch(\Exception $e){
             DB::rollBack();
             dd($e->getMessage() , $e->getLine());
+            Alert::error('error', 'Tell The Programmer To solve Error');
+            return redirect()->route('admin.events.index'); 
 
         }
 
