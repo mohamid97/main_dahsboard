@@ -22,7 +22,7 @@ class SocialMediaResource extends JsonResource
            'tiktok'       =>['link'=>$this->tiktok , 'option'=>($this->tiktok_option != null) ? 'On' : 'Off'],
            'youtube'      =>['link'=>$this->youtube	 , 'option'=>($this->youtube_option != null) ? 'On' : 'Off'],
            'snapchat'     =>['link'=>$this->snapchat	 , 'option'=>($this->snapchat_option != null) ? 'On' : 'Off'],
-           'whatsup'      =>['link'=>$this->snapchat	 , 'option'=>($this->whatsup_option != null) ? 'On' : 'Off'],
+           'whatsup'      =>['link'=>$this->whatsup	 , 'option'=>($this->whatsup_option != null) ? 'On' : 'Off'],
            'skype'      =>['link'=>$this->skype	 , 'option'=>($this->skype_option != null) ? 'On' : 'Off'],
            'email'      =>['link'=>$this->email	 , 'option'=>($this->email_option != null) ? 'On' : 'Off'],
            'phone'      =>['link'=>$this->phone	 , 'option'=>($this->phone_option != null) ? 'On' : 'Off'],

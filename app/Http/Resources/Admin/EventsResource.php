@@ -20,5 +20,6 @@ class EventsResource extends JsonResource
         'des'=>$this->des,
         'media'=>new MediaGroupResource(MediaGroup::with(['gallerys' ,'files' , 'viedos' ])->find($this->media_id)),
        ];
+       
     }
 }
