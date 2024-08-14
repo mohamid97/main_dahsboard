@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\CategoryDetailsResource;
 use App\Http\Resources\Admin\CategoryResource;
+use App\Http\Resources\Admin\CategoryWithProductsAndSubsResource;
 use App\Models\Admin\Category;
 use App\Trait\ResponseTrait;
 use Illuminate\Http\Request;
@@ -56,6 +57,20 @@ class CategoryController extends Controller
 
         return  $this->res(true ,'Parent Category with sub category' , 200 ,new CategoryDetailsResource($category));
     } 
+
+
+    public function sub_category_with_products(Request $request){
+        $category_details = Category::with(['products'  , 'childs'])->whereHas('translations', function ($query) use($request) {
+            $query->where('locale', '=', app()->getLocale())->where('slug' , $request->slug);
+        })->first();
+        if(optional($category_details)->exists()){
+            return  $this->res(true ,'Category Details' , 200 , new CategoryWithProductsAndSubsResource($category_details));
+        }
+
+        return  $this->res(false ,'Category details not found. Maybe there is no data with this slug or no data in this language.' , 404);
+
+
+    }
 
 
 

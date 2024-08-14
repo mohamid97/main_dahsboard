@@ -69,7 +69,7 @@ class OurworkController extends Controller
                 'photo'     => ( $image_name != null) ? $image_name : $Ourwork->photo,
                 'icon'      => ( $icon_name != null) ? $icon_name : $Ourwork->icon,
                 'link'      => $request->link,
-                'media_id'  => $request->media_id
+                'media_id'  => ($request->media_id != 'null') ? $request->media_id : null
             ]);
 
             foreach ($this->langs as $lang) {
@@ -124,7 +124,7 @@ class OurworkController extends Controller
             $ourwork->icon = $icon_name;
             $ourwork->photo = $image_name;
             $ourwork->link = $request->link;
-            $ourwork->media_id = $request->media_id;
+            $ourwork->media_id = ($request->media_id != 'null') ? $request->media_id : null;
             foreach ($this->langs as $lang) {
                 $ourwork->{'name:'.$lang->code}  = $request->name[$lang->code];
                 $ourwork->{'des:'.$lang->code}  = $request->des[$lang->code];

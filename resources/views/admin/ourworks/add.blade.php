@@ -186,7 +186,7 @@
                         <div class="form-group">
                             <label>Media</label>
                             <select type="text" name="media_id" class="form-control">
-                                <option value="0">Select Media</option>
+                                <option value="null">Select Media</option>
                                 @forelse($medias as $media)
                                     <option value="{{$media->id}}">{{$media->name}}</option>
                                 @empty

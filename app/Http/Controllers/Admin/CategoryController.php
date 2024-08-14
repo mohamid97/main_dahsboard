@@ -55,7 +55,7 @@ class CategoryController extends Controller
             }
             $categry = new Category();
             $categry->type = $request->type;
-            $categry->parent_id = ($request->type == 1) ? $request->type : null;
+            $categry->parent_id = ($request->type == 1) ? Category::find($request->parent_id)->id : null;
             $categry->photo = $image_name;
             $categry->star = $request->star;
             foreach ($this->langs as $lang) {
@@ -92,7 +92,7 @@ class CategoryController extends Controller
                $request->photo->move(public_path('uploads/images/category'), $image_name);
            }
            $cat->type = $request->type;
-           $cat->parent_id = ($request->type == 1) ? $request->type : null;
+           $cat->parent_id = ($request->type == 1) ? Category::find($request->parent_id)->id : null;
            $cat->photo = ($image_name != null) ? $image_name : $cat->photo;
            $cat->star = isset($request->star) ? $request->star : null;
            foreach ($this->langs as $lang) {

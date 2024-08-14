@@ -50,6 +50,10 @@ Route::middleware('checkLang')->group(function (){
         Route::post('/details' , [\App\Http\Controllers\Api\CategoryController::class , 'get_details']);
         Route::get('/subcategory/get' , [\App\Http\Controllers\Api\CategoryController::class , 'get_category_with_sub']);
         Route::post('/sub_category/category/get' , [\App\Http\Controllers\Api\CategoryController::class , 'get_category_from_sub']);
+
+        //get category,s products and sub category
+        Route::post('/sub_category_with_products' , [\App\Http\Controllers\Api\CategoryController::class , 'sub_category_with_products']);
+
     });
 
     Route::prefix('our-works')->group(function (){
