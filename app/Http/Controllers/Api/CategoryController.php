@@ -60,7 +60,7 @@ class CategoryController extends Controller
 
 
     public function sub_category_with_products(Request $request){
-        $category_details = Category::with(['products'  , 'childs'])->whereHas('translations', function ($query) use($request) {
+        $category_details = Category::with(['products.gallery'  , 'childs'])->whereHas('translations', function ($query) use($request) {
             $query->where('locale', '=', app()->getLocale())->where('slug' , $request->slug);
         })->first();
         if(optional($category_details)->exists()){

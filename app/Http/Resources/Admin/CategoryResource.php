@@ -27,7 +27,8 @@ class CategoryResource extends JsonResource
             'meta_title' => $this->meta_title,
             'meta_des'   => $this->meta_des,
             'slug'=>$this->slug,
-            'childs'=>$this->whenLoaded('childs')
+            'childs'=>$this->whenLoaded('childs'),
+            'products'=>$this->whenLoaded('products')
             
           
         ];
