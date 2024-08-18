@@ -743,6 +743,13 @@
                                         </a>
                                     </li>
 
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.ach.add')}}" class="nav-link">
+                                            <i class="fa fa-plus nav-icon"></i>
+                                            <p>  Add </p>
+                                        </a>
+                                    </li>
+
 
 
                                 </ul>

@@ -5,12 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>About Us</h1>
+                    <h1>
+                        Achievenments </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Achievement</li>
+                        <li class="breadcrumb-item active">Achievenments</li>
                     </ol>
                 </div>
             </div>
@@ -19,121 +20,85 @@
 
     <section class="content">
         <div class="container-fluid">
+            <div>
 
+                <a href="{{route('admin.ach.add')}}" style="color: #FFF">
+                    <button class="btn btn-info" >
+                        <i class="nav-icon fas fa-plus"></i> Add New Achievenment
+                    </button>
+                </a>
+
+            </div>
+            <br>
             <div class="card card-info">
+
                 <div class="card-header">
-                    <h3 class="card-title">Achievement</h3>
+                    <h3 class="card-title">All Achievenments</h3>
+
                 </div>
                 <!-- /.card-header -->
-                <!-- form start -->
-                <form role="form" method="post" action="{{route('admin.ach.update')}}" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="card-body">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Icon | image</th>
+                            <th>Name</th>
+                            <th>value</th>
+                            <th>Action</th>
 
+                        </tr>
+                        </thead>
+                        <tbody>
 
+                        @forelse($achieves as $index => $ach)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>
+                                    <img src="{{asset('uploads/images/achs/'. $ach->image)}}" width="70px" height="70px">
+                                </td>
+                                <td>{{$ach->name}}</td>
+                                <td>{{$ach->value}}</td>
+                                <td>
+                                    <a href="{{route('admin.ach.edit' ,  ['id' => $ach->id])}}">
+                                        <button class="btn btn-sm btn-info"> <i class="nav-icon fas fa-edit"></i> Edit</button>
+                                    </a>
 
-                        <div class="form-group">
-                            <label for="years_exp">Years Of Experience</label>
-                            <input type="text" name="years_exp" class="form-control" id="years_exp" placeholder="Enter Years Experience" value="{{ $achieve->years_exp }}">
-                            @error('years_exp')
-                            <div class="text-danger">{{ $errors->first('years_exp') }}</div>
-                            @enderror
-                        </div>
+                                    @if($ach->deleted_at == null)
 
-                        <div class="form-group">
-                            <label for="number_of_clients">Number Of Clients</label>
-                            <input type="text" name="number_of_clients" class="form-control" id="number_of_clients" placeholder="Enter Number Of Clients" value="{{ $achieve->number_of_clients }}">
-                            @error('number_of_clients')
-                            <div class="text-danger">{{ $errors->first('number_of_clients') }}</div>
-                            @enderror
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label for="number_of_clients">Number Of Departments</label>
-                            <input type="text" name="number_of_deps" class="form-control" id="number_of_deps" placeholder="Enter Number Of Departments" value="{{ $achieve->number_of_deps }}">
-                            @error('number_of_deps')
-                            <div class="text-danger">{{ $errors->first('number_of_deps') }}</div>
-                            @enderror
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label for="number_of_products">Number Of Products</label>
-                            <input type="text" name="number_of_products" class="form-control" id="number_of_products" placeholder="Enter Number Of Products" value="{{ $achieve->number_of_products }}">
-                            @error('number_of_products')
-                            <div class="text-danger">{{ $errors->first('number_of_products') }}</div>
-                            @enderror
-                        </div>
+                                        <a href="{{route('admin.ach.soft_delete' ,  ['id' => $ach->id])}}">
+                                            <button class="btn btn-sm btn-info"><i class="nav-icon fas fa-trash"></i> Soft Delete</button>
+                                        </a>
+                                    @else
+                                        <a href="{{route('admin.ach.restore' ,  ['id' => $ach->id])}}">
+                                            <button class="btn btn-sm btn-info"><i class="nav-icon fas fa-trash-restore"></i> Restore</button>
+                                        </a>
+                                    @endif
 
 
 
 
-                        <div class="form-group">
-                            <label for="number_of_emps">Number Of Employees</label>
-                            <input type="text" name="number_of_emps" class="form-control" id="number_of_emps" placeholder="Enter Number Of Employees" value="{{ $achieve->number_of_emps }}">
-                            @error('number_of_emps')
-                            <div class="text-danger">{{ $errors->first('number_of_emps') }}</div>
-                            @enderror
-                        </div>
+
+                                    <a href="{{route('admin.ach.destroy' ,  ['id' => $ach->id])}}">
+                                        <button class="btn btn-sm btn-danger"><i class="nav-icon fas fa-trash"></i> Remove</button>
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3"> No Data</td>
+                            </tr>
+                        @endforelse
 
 
+                        </tbody>
+                    </table>
+                </div>
 
-
-                        <div class="form-group">
-                            <label for="num1">Number Of num 1</label>
-                            <input type="text" name="num1" class="form-control" id="num1" placeholder="Enter Number 1" value="{{ $achieve->num1 }}">
-                            @error('num1')
-                            <div class="text-danger">{{ $errors->first('num1') }}</div>
-                            @enderror
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label for="num2">Number Of num 2</label>
-                            <input type="text" name="num2" class="form-control" id="num2" placeholder="Enter Number 2" value="{{ $achieve->num2 }}">
-                            @error('num2')
-                            <div class="text-danger">{{ $errors->first('num2') }}</div>
-                            @enderror
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="number_of_emps">Number Of num 3</label>
-                            <input type="text" name="num3" class="form-control" id="num3" placeholder="Enter Number Of num 3" value="{{ $achieve->num3 }}">
-                            @error('num3')
-                            <div class="text-danger">{{ $errors->first('num3') }}</div>
-                            @enderror
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="number_of_emps">Number Of num 4</label>
-                            <input type="text" name="num4" class="form-control" id="num4" placeholder="Enter Number 4" value="{{ $achieve->num4 }}">
-                            @error('num4')
-                            <div class="text-danger">{{ $errors->first('num4') }}</div>
-                            @enderror
-                        </div>
-
-
-
-                    </div>
-
-
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-info"> <i class="nav-icon fas fa-paper-plane"></i> Update</button>
-                    </div>
-
-
-                </form>
             </div>
-
         </div>
     </section>
+
 @endsection
-
-

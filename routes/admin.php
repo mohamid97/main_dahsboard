@@ -404,7 +404,13 @@ Route::middleware('checkIfAdmin')->prefix('admin')->group(function (){
     // start achievement
     Route::prefix('achievements')->group(function (){
         Route::get('/'  , [AchievementConroller::class , 'index'])->name('admin.ach.index');
-        Route::post('/update'  , [AchievementConroller::class , 'update'])->name('admin.ach.update');
+        Route::get('/add'  , [AchievementConroller::class , 'add'])->name('admin.ach.add');
+        Route::get('/edit/{id}'  , [AchievementConroller::class , 'edit'])->name('admin.ach.edit');
+        Route::post('/store'  , [AchievementConroller::class , 'store'])->name('admin.ach.store');
+        Route::post('/update/{id}'  , [AchievementConroller::class , 'update'])->name('admin.ach.update');
+        Route::get('/soft_delete/{id}' , [AchievementConroller::class , 'soft_delete'])->name('admin.ach.soft_delete');
+        Route::get('/restore/{id}' , [AchievementConroller::class , 'restore'])->name('admin.ach.restore');
+        Route::get('/destroy/{id}' , [AchievementConroller::class , 'destroy'])->name('admin.ach.destroy');
     });
 
 
