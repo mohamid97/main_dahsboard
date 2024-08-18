@@ -13,7 +13,9 @@ class AchivementController extends Controller
     use ResponseTrait;
     //
     public function get(){
-        $statistics = Achievement::first();
-        return  $this->res(true ,'All statistics' , 200 , new AchivementResource($statistics));
+        $statistics = Achievement::whereHas('translations', function ($query) {
+            $query->where('locale', '=', app()->getLocale());
+        })->get();
+        return  $this->res(true ,'All statistics' , 200 ,  AchivementResource::collection($statistics));
     }
 }
